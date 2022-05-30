@@ -10,8 +10,55 @@ fondo.addEventListener('load', ()=>{
     ctx.drawImage(fondo,0,0);
 });
 
-const vidas = 3;
+let vidas = 3;
 let ganar = 0;
+
+
+
+class personaje{
+    constructor(x,y){
+        this.x=x;
+        this.y=y;
+        const kirby = new Image();
+        kirby.src = "./statics/media/img/kirby1.png";
+        this.image= kirby;
+    }
+
+    dibujark(){
+        ctx.drawImage(this.image, 0, 0, 181, 178, this.x, this.y, 55, 54 );
+    }
+
+    validar(enemigo){
+        console.log(enemigo);
+        console.log(kirby);
+        if(this.x == enemigo.x && this.y == enemigo.y){
+            console.log(this.x);
+            console.log("colision");
+            vidas-= 1;
+            console.log(vidas);
+        }
+        if(vidas == 0){
+            console.log("entre");
+            this.x = 250;
+            this.y = 370;
+        } else{
+            ganar === 1;
+        }
+        if(ganar==1){
+            console.log("Ganaste!");
+            victoria();
+        }
+    }
+    victoria(){
+        ctx.fillRect(0,0,500,500);
+        ctx.fillStyle("#ffffff");
+        ctx.fillText("Ganaste!", 0, 0); 
+    }
+    
+}
+
+const kirby = new personaje(250,370);
+
 
 class enemigo{
     constructor(x, y, dx, dy, swidth, sheight, dwidth, dheight, ruta){
@@ -38,6 +85,7 @@ class enemigo{
             this.x = -100;
         }
     }
+    
 }
 
 //coordenadas de los obstaculos, si las de kirby son mayores o iguales hay colision
@@ -61,92 +109,81 @@ function dibujar() {
     car2.dibujar();
     police.dibujar();
     police2.dibujar();
-    dibujark();
+    kirby.dibujark();
 
     window.requestAnimationFrame(dibujar);
 }
 
 window.requestAnimationFrame(dibujar);
 
-const kirby = new Image();
-kirby.src = "./statics/media/img/kirby1.png";
-
-const kirbyi  = {
-
-    x : 250,
-    y : 370,
-}
-
-console.log(kirbyi);
-
     x=250;
     y=370;
 
     let movimiento = document.addEventListener("keydown", (event)=> {
+        
         switch(event.key){
             case 'ArrowUp':
-                y-=10;
+                kirby.y -= 10;
+                kirby.validar(bus);
                 break;
             case 'ArrowDown':
-                y+=10;
+                kirby.y+=10;
+                kirby.validar(bus);
+
                 break;
             case 'ArrowLeft':
-                x-=10;
+                kirby.x-=10;
+                kirby.validar(bus);
+
                 break;
             case 'ArrowRight':
-                x+=10;
+                kirby.x+=10;
+                kirby.validar(bus);
+
                 break;
             case 'Enter':
                 console.log("enter <3");
+
                 break;
             default:
                 console.log("no sirve <3");
                 break;
+                
+            
         }
 
     });
 
 
-function dibujark(){
-    ctx.drawImage(kirby, 0, 0, 181, 178, x, y, 55, 54 );
-} 
 
-class colisiones {
-    constructor(x, y){
-        this.x = x;
-        this.y = y;
-    }
+// class colisiones {
+//     constructor(x, y){
+//         this.x = x;
+//         this.y = y;
+//     }
 
-    validar(kirbyi){
-        if(kirbyi.x == this.x || kirbyi.y == this.y){
-            console.log(kirbyi.x);
-            console.log("colision");
-            vidas--;
-        }
-        if(vidas == 0){
-            kirbyi.x = 250;
-            kirbyi.y = 370;
-        } else{
-            ganar === 1;
-        }
-        if(ganar==1){
-            console.log("Ganaste!");
-            victoria();
-        }
-    }
-}
+//     validar(kirbyi){
+//         if(kirbyi.x == this.x || kirbyi.y == this.y){
+//             console.log(kirbyi.x);
+//             console.log("colision");
+//             vidas--;
+//         }
+//         if(vidas == 0){
+//             kirbyi.x = 250;
+//             kirbyi.y = 370;
+//         } else{
+//             ganar === 1;
+//         }
+//         if(ganar==1){
+//             console.log("Ganaste!");
+//             victoria();
+//         }
+//     }
+// }
 
-const camion = new colisiones(0, 134);
-camion.validar();
+// console.log(kirbyi);
+//  validar(kirbyi);
 
-console.log(kirbyi);
- validar(kirbyi);
-
-function victoria(){
-    ctx.fillRect(0,0,500,500);
-    ctx.fillStyle("#ffffff");
-    ctx.fillText("Ganaste!", 0, 0); 
-}
 
 // class personaje{
 

@@ -19,18 +19,22 @@ let spriteY = 0;
 const bus = new Image();
 bus.src = "./statics/media/img/spriteBus.png";
 
+const cab = new Image();
+cab.src = "./statics/media/img/caballor.png";
+
 function dibujar() {
-        
-        //movimiento
-        ctx.drawImage(bus, spriteX, spriteY, 116, 54, x, y, 116, 54);
+        ctx.drawImage(fondo, 0, 0, canvas.clientWidth, canvas.height);
 
-        spriteX += 1;
-        spriteY += 2;
+        y = 134;
+        ctx.drawImage(bus, spriteX, spriteY, 116, 54, x, y, 100, 54);
+        x += 1;
+
+        //spriteX = 54;
+        //spriteY = 65;
+        y = 192;
+        ctx.drawImage(cab, spriteX, spriteY, 63, 54, x, y, 100, 54);
+        x -= 1;
   
-
-        //request
         window.requestAnimationFrame(dibujar);
 }
-
-//request
 window.requestAnimationFrame(dibujar);

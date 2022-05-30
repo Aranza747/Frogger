@@ -1,3 +1,38 @@
+@font-face {
+    font-family: "titles";
+    src: url("../fonts/titles.ttf");
+}
+
 body{
-    background-color: rgb(10, 223, 10);
+    background-color: rgb(165, 228, 165);
+    /* display:flex;
+    justify-content: center; */
+}
+
+.canvapro{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    height: 100%;
+    position: relative;
+    /* bottom: -70px; */
+}
+
+#title{
+    font-family: "titles",'Arial', cursive;
+    text-shadow: 3px 2px green;
+    display:flex;
+    justify-content: center;
+    margin-top: 4%;
+}
+
+#puntaje{
+    display:flex;
+    justify-content: center;
+    margin: 10px;
+}
+
+.subtitle{
+    font-family: "titles",'Arial', cursive;
+    font-size: smaller;
 }

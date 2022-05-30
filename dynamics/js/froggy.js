@@ -8,22 +8,6 @@ fondo.addEventListener('load', ()=>{
     ctx.drawImage(fondo,0,0);
 });
 
-let x1 = 0;
-let x2 = 0;
-let x3 = 0;
-let x4 = 0;
-
-let y = 0;
-let spriteX1 = 0;
-let spriteX2 = 0;
-let spriteX3 = 0;
-let spriteX4 = 0;
-let spriteY1 = 0;
-let spriteY2 = 0;
-let spriteY3 = 0;
-let spriteY4 = 0;
-let rebota;
-
 class enemigo{
     constructor(x, y, dx, dy, swidth, sheight, dwidth, dheight, ruta){
         this.x = x;

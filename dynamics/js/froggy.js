@@ -1,12 +1,17 @@
 const canvas = document.getElementById("canvasf");
 const ctx = canvas.getContext("2d");
 
+document.cookie="cookie=0";
+
 const fondo = new Image();
 fondo.src = "./statics/media/img/froggypro.png";
 
 fondo.addEventListener('load', ()=>{
     ctx.drawImage(fondo,0,0);
 });
+
+const vidas = 3;
+let ganar = 0;
 
 class enemigo{
     constructor(x, y, dx, dy, swidth, sheight, dwidth, dheight, ruta){
@@ -25,7 +30,6 @@ class enemigo{
         this.img = imagen;
     };
 
-
     dibujar() {
         if(this.x <= canvas.width){ 
             ctx.drawImage(this.img, this.spriteX, this.spriteY, this.swidth, this.sheight, this.x, this.y, this.dwidth, this.dheight);
@@ -34,8 +38,9 @@ class enemigo{
             this.x = -100;
         }
     }
-
 }
+
+//coordenadas de los obstaculos, si las de kirby son mayores o iguales hay colision
 
 const bus = new enemigo(0, 134, 7, 0, 116, 54, 100, 54, "./statics/media/img/spriteBus.png");
 const bus2 = new enemigo(250, 192, 4, 0, 116, 54, 100, 54, "./statics/media/img/spriteBus.png");
@@ -58,15 +63,25 @@ function dibujar() {
     police2.dibujar();
     dibujark();
 
-        window.requestAnimationFrame(dibujar);
+    window.requestAnimationFrame(dibujar);
 }
 
 window.requestAnimationFrame(dibujar);
 
-const kirbyi = new Image();
-kirbyi.src = "./statics/media/img/kirby1.png";
+const kirby = new Image();
+kirby.src = "./statics/media/img/kirby1.png";
+
+const kirbyi  = {
+
+    x : 250,
+    y : 370,
+}
+
+console.log(kirbyi);
+
     x=250;
     y=370;
+
     let movimiento = document.addEventListener("keydown", (event)=> {
         switch(event.key){
             case 'ArrowUp':
@@ -88,12 +103,50 @@ kirbyi.src = "./statics/media/img/kirby1.png";
                 console.log("no sirve <3");
                 break;
         }
+
     });
 
 
 function dibujark(){
-    ctx.drawImage(kirbyi, 0, 0, 181, 178, x, y, 55, 54 )
+    ctx.drawImage(kirby, 0, 0, 181, 178, x, y, 55, 54 );
 } 
+
+class colisiones {
+    constructor(x, y){
+        this.x = x;
+        this.y = y;
+    }
+
+    validar(kirbyi){
+        if(kirbyi.x == this.x || kirbyi.y == this.y){
+            console.log(kirbyi.x);
+            console.log("colision");
+            vidas--;
+        }
+        if(vidas == 0){
+            kirbyi.x = 250;
+            kirbyi.y = 370;
+        } else{
+            ganar === 1;
+        }
+        if(ganar==1){
+            console.log("Ganaste!");
+            victoria();
+        }
+    }
+}
+
+const camion = new colisiones(0, 134);
+camion.validar();
+
+console.log(kirbyi);
+ validar(kirbyi);
+
+function victoria(){
+    ctx.fillRect(0,0,500,500);
+    ctx.fillStyle("#ffffff");
+    ctx.fillText("Ganaste!", 0, 0); 
+}
 
 // class personaje{
 

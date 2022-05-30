@@ -1,8 +1,5 @@
-const canvas = document.getElementById("mi-canvas");
+const canvas = document.getElementById("canvasf");
 const ctx = canvas.getContext("2d");
-
-let x = 0;
-let y = 0;
 
 const fondo = new Image();
 fondo.src = "./statics/media/img/froggypro.png";
@@ -11,15 +8,29 @@ fondo.addEventListener('load', ()=>{
     ctx.drawImage(fondo,0,0);
 });
 
-window.setInterval(() => {
-    //El rectpangulo que taba el rastro de los otros rectángulos
-    ctx.fillStyle = "#4040aa";
-    ctx.fillRect(0, 0, canvas.clientWidth, canvas.height);  
-    //EL "movivimento" del rectángulo pequeño
-    ctx.fillStyle = "#ff0000";
-    ctx.fillRect(x, y, 32, 16);
-    //Velocidad del rectángulo pequeño (minetras mayos sean los valores ira más rápido)
-    x += 2;
-    y += 3;
-    //Tiempo en milisegundos del rectángulo pequeño
-}, 16);
+
+let x = 0;
+let y = 0;
+/*let dx = 3;
+let dy = 1;*/
+let spriteX = 0;
+let spriteY = 0;
+
+const bus = new Image();
+bus.src = "./statics/media/img/spriteBus.png";
+
+function dibujar() {
+        
+        //movimiento
+        ctx.drawImage(bus, spriteX, spriteY, 116, 54, x, y, 116, 54);
+
+        spriteX += 1;
+        spriteY += 2;
+  
+
+        //request
+        window.requestAnimationFrame(dibujar);
+}
+
+//request
+window.requestAnimationFrame(dibujar);

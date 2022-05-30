@@ -5,8 +5,9 @@
 
 body{
     background-color: rgb(165, 228, 165);
-    /* display:flex;
-    justify-content: center; */
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .canvapro{
@@ -16,6 +17,7 @@ body{
     height: 100%;
     position: relative;
     /* bottom: -70px; */
+    z-index: 0;
 }
 
 #title{
@@ -28,11 +30,12 @@ body{
 
 #puntaje{
     display:flex;
-    justify-content: center;
+    justify-content:space-evenly;
     margin: 10px;
+    width: 500px;
 }
 
-.subtitle{
+h2{
     font-family: "titles",'Arial', cursive;
-    font-size: smaller;
+    font-size: 12px;
 }
